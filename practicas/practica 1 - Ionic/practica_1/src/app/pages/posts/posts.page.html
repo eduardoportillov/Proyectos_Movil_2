@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>posts</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="posts">
+    <div *ngFor="let post of posts">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>{{post.title}}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          {{post.body}}
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+</ion-content>
