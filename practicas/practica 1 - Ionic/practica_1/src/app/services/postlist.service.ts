@@ -6,12 +6,17 @@ import { Post } from 'src/models/post';
   providedIn: 'root'
 })
 export class PostlistService {
+  url = `https://jsonplaceholder.typicode.com`;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getPostList() {
     // get post list from jsonplaceholder with http
-    return this.http.get<Post[]>('https://jsonplaceholder.typicode.com/posts');
+    return this.http.get<Post[]>(`${this.url}/posts`);
+  }
+
+  getPostByKey(key: number) {
+    return this.http.get<Post>(`${this.url}/posts/${key}`);
   }
 
 }

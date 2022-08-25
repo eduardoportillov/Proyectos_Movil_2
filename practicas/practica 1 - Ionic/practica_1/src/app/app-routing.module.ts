@@ -11,13 +11,17 @@ const routes: Routes = [
     loadChildren: () => import('./pages/about/about.module').then( m => m.AboutPageModule)
   },
   {
+    path: 'posts',
+    loadChildren: () => import('./pages/posts/posts.module').then( m => m.PostsPageModule)
+  },
+  {
+    path: 'infopost/:id',
+    loadChildren: () => import('./pages/infopost/infopost.module').then( m => m.InfopostPageModule)
+  },
+  {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
-  },
-  {
-    path: 'posts',
-    loadChildren: () => import('./pages/posts/posts.module').then( m => m.PostsPageModule)
   },
 ];
 
