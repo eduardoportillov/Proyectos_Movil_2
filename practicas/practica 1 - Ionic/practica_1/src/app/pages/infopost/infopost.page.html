@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>infopost</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+</ion-content>
+
+
+<ion-content>
+  <div *ngIf="infoPost">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>ID: {{infoPost.id}} - {{infoPost.title}}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          {{infoPost.body}}
+        </ion-card-content>
+      </ion-card>
+    </div>
+</ion-content>
