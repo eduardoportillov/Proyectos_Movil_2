@@ -1,0 +1,7 @@
+{
+  "name": "Practica_DB",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
