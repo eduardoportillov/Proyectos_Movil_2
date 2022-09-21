@@ -24,7 +24,7 @@ export class DbService {
         this.database = db;
         this.createTables();
       })
-      .catch((e) => console.log(e));
+      .catch((e) => console.log('createDb():' + 'title:' +e.title + ' Message: ' + e.message));
   }
 
   async createTables() {
@@ -35,16 +35,16 @@ export class DbService {
         []
       )
       .then(() => console.log('Executed SQL'))
-      .catch((e) => console.log(e));
+      .catch((e) => console.log('Create notes error:' + 'title:' +e.title + ' Message: ' + e.message));
 
       await this.database
       .executeSql(
         // eslint-disable-next-line max-len
-        'create table if not exists todos(id INTEGER PRIMARY KEY AUTOINCREMENT, content TEXT NOT NULL, checked BOOLEAN NOT NULL, CONSTRAINT fk_notes foreign key(note_id) references note(id) ON DELETE CASCADE',
+        'create table if not exists todos(id INTEGER PRIMARY KEY AUTOINCREMENT, content TEXT NOT NULL, checked BOOLEAN NOT NULL, note_id INTEGER, CONSTRAINT fk_notes foreign key(note_id) references note(id) ON DELETE CASCADE)',
         []
       )
       .then(() => console.log('Executed SQL'))
-      .catch((e) => console.log(e));
+      .catch((e) => console.log('Create todos error:' + 'title:' +e.title + ' Message: ' + e.message));
 
   }
 }

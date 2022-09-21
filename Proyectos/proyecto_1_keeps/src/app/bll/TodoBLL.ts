@@ -19,41 +19,21 @@ export class TodoBLL {
       .catch((e) => console.log(`Error en el insert`, e));
   }
 
-  async selectAll(db: DbService) {
+  async selectByNote(db: DbService, id: number) {
     if (!db.database) {
       await db.createDb();
     }
-    // eslint-disable-next-line max-len
-    const sqlText = `SELECT * FROM todos`;
-    const todos: Todo[] = [];
-
-    await db.database
-      .executeSql(sqlText, [])
-      .then((res) => {
-        if (res.rows.length > 0) {
-          for (let i = 0; i < res.rows.length; i++) {
-            const row = res.rows.item(i);
-            todos.push(row);
-          }
-        }
-      })
-      .catch((e) => console.log(`Error en el selectAll`, e));
-
-    return todos;
-  }
-
-  async selectById(db: DbService, id: number) {
-    if (!db.database) {
-      await db.createDb();
-    }
-    const sqlText = `SELECT * FROM todos where id = ?`;
-    let todo: Todo;
+    const sqlText = `SELECT * FROM todos where note_id = ?`;
+    let todo: Todo[];
 
     await db.database
       .executeSql(sqlText, [id])
       .then((res) => {
-        if (res.rows.length === 1) {
-          todo = res.rows.item(0);
+        if (res.rows.length > 0) {
+          for (let i = 0; i < res.rows.length; i++) {
+            const row = res.rows.item(i);
+            todo.push(row);
+          }
         }
       })
       .catch((e) => console.log(`Error en el selectById`, e));
@@ -61,29 +41,7 @@ export class TodoBLL {
     return todo;
   }
 
-  async delete(db: DbService, id: number) {
-    if (!db.database) {
-      await db.createDb();
-    }
-    const sqlText = `DELETE FROM todos where id = ?`;
-    let responseDB: any;
-
-    await db.database
-      .executeSql(sqlText, [id])
-      .then((res) => {
-        responseDB = res;
-        console.log(`Todo deleted`, res);
-      })
-      .catch((e) => console.log(`Error al Eliminar`, e));
-
-    return responseDB;
-  }
-
-  async updateContent(
-    db: DbService,
-    id: number,
-    content: string,
-  ) {
+  async updateContent(db: DbService, id: number, content: string) {
     if (!db.database) {
       await db.createDb();
     }
@@ -115,6 +73,24 @@ export class TodoBLL {
         console.log(`Todos Actualizados`, res);
       })
       .catch((e) => console.log(`Error al Actualizar`, e));
+
+    return responseDB;
+  }
+
+  async delete(db: DbService, id: number) {
+    if (!db.database) {
+      await db.createDb();
+    }
+    const sqlText = `DELETE FROM todos where id = ?`;
+    let responseDB: any;
+
+    await db.database
+      .executeSql(sqlText, [id])
+      .then((res) => {
+        responseDB = res;
+        console.log(`Todo deleted`, res);
+      })
+      .catch((e) => console.log(`Error al Eliminar`, e));
 
     return responseDB;
   }

@@ -101,7 +101,7 @@ export class NoteBLL {
         responseDB = res;
         console.log(`Note deleted`, res);
       })
-      .catch((e) => console.log(`Error al Eliminar`, e));
+      .catch((e) => console.log(`Error al Actualizar`, e));
 
     return responseDB;
   }

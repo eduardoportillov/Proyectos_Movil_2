@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { NoteComponent } from './note.component';
+import { NoteCreateComponent } from './note-create.component';
 
-describe('NoteComponent', () => {
-  let component: NoteComponent;
-  let fixture: ComponentFixture<NoteComponent>;
+describe('NoteCreateComponent', () => {
+  let component: NoteCreateComponent;
+  let fixture: ComponentFixture<NoteCreateComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ NoteComponent ],
+      declarations: [ NoteCreateComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(NoteComponent);
+    fixture = TestBed.createComponent(NoteCreateComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));
