@@ -1,9 +1,11 @@
-<div class="container" (click)="onClick()">
-  <span *ngIf="note.type === 'text'" class="pinned-icon"></span>
+<div *ngIf="note" (click)="onClick(note.id)">
   <h1 *ngIf="note.title">{{ note.title }}</h1>
-  <p *ngIf="note.type === 'text'" [innerText]="note.description">
-    {{ note.description }}
-  </p>
+
+  <ion-item *ngIf="note.type === 'text'">
+    <ion-label>
+      {{ note.description }}
+    </ion-label>
+  </ion-item>
 
   <ion-list *ngIf="note.type === 'todo'">
     <ion-item *ngFor="let todo of todos">
@@ -12,4 +14,5 @@
       </ion-checkbox>
     </ion-item>
   </ion-list>
+
 </div>

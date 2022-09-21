@@ -19,8 +19,24 @@ export class HomePage implements OnInit {
   ngOnInit(){
     this.loadNotas();
   }
+
+  doRefresh(event) {
+    this.loadNotas();
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      event.target.complete();
+    }, 2000);
+  }
+
   async loadNotas() {
     const notebll = new NoteBLL();
     this.notes = await notebll.selectAll(this.db);
+  }
+
+  async delete(id: number) {
+    const notebll = new NoteBLL();
+    await notebll.delete(this.db, id);
+    this.loadNotas();
   }
 }

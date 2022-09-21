@@ -1,18 +1,21 @@
-<!-- <form #f="ngForm" (ngSubmit)="onSubmit(f)">
-  <input type="text" name="title" id="title" placeholder="Title" *ngIf="oppened" ngModel>
-  <textarea name="body" id="body" placeholder="Create a note..." rows="1" #ta (input)="autoResizeBody(ta)" (focus)="onBodyFocus()" ngModel></textarea>
-  <input type="datetime-local" name="completionDate" id="completionDate" *ngIf="oppened" ngModel>
-  <input type="text" name="assigneeEmailsStr" id="assigneeEmailsStr" placeholder="email1@domain.com;email2@domain.ie" *ngIf="oppened && displayAssignee" ngModel>
-  <div class="contols-container" *ngIf="oppened">
-    <ul class="controls">
-      <li>
-        <label for="pinned">
-          <input type="checkbox" name="pinned" id="pinned" style="display: none;" ngModel />
-          <span class="pinned-span"></span>
-        </label>
-      </li>
-      <li><a id="assign-btn" (click)="toggleAssignee()"></a></li>
-    </ul>
-    <input type="submit" value="Close">
+<form #f="ngForm" (ngSubmit)="onSubmit()" [formGroup]="formText">
+  <div *ngIf="type === 'text'">
+    <ion-input
+      type="text"
+      formControlName="title"
+      placeholder="Title"
+      *ngIf="opened"
+      ngModel
+    ></ion-input>
+    <textarea
+      name="description"
+      formControlName="description"
+      id="description"
+      placeholder="Create a note..."
+      rows="1"
+      (focus)="onBodyFocus()"
+    ></textarea>
+    <br>
+    <ion-button type="submit" value="Close" *ngIf="opened">Cerrar</ion-button>
   </div>
-</form> -->
+</form>

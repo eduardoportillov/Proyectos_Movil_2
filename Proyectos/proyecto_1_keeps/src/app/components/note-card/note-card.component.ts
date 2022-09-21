@@ -15,14 +15,13 @@ export class NoteCardComponent implements OnInit {
 
   todoBLL = new TodoBLL();
 
-  constructor(private db: DbService) {
-  }
+  constructor(private db: DbService) {}
 
   ngOnInit() {
     console.log('debbuger note ' + this.note.title);
-    // if (this.note.type === 'todo') {
-    //   this.loadTodo(this.note.id);
-    // }
+    if (this.note.type === 'todo') {
+      this.loadTodo(this.note.id);
+    }
   }
 
   async loadTodo(noteId: number) {
@@ -30,8 +29,8 @@ export class NoteCardComponent implements OnInit {
     this.todos = await todobll.selectByNote(this.db, noteId);
   }
 
-  onClick() {
+  onClick(id: number) {
     // this.noteUpdateDialogService.showDialog(this.note);
-    console.log('clicked');
+    console.log('clicked '+id);
   }
 }

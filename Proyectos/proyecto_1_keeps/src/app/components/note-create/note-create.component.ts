@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import { NoteBLL } from 'src/app/bll/NoteBLL';
+import { DbService } from 'src/app/services/db/db.service';
 
 @Component({
   selector: 'app-note-create',
@@ -7,25 +9,38 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./note-create.component.scss'],
 })
 export class NoteCreateComponent implements OnInit {
-  public oppened = false;
-  public displayAssignee = false;
+  opened = false;
+  type = 'text';
 
-  constructor() {}
+  formText: FormGroup;
 
-  ngOnInit() {}
+  notaBLL = new NoteBLL();
 
-  autoResizeBody(ta: any) {
-    ta.style.height = 'auto';
-    ta.style.height = ta.scrollHeight + 'px';
+  constructor(private db: DbService) {}
+
+  ngOnInit() {
+    this.formText = new FormGroup({
+      title: new FormControl('', [Validators.required]),
+      description: new FormControl('', [Validators.required]),
+    });
   }
 
   onBodyFocus() {
-    this.oppened = true;
+    this.opened = true;
   }
 
-  toggleAssignee() {
-    this.displayAssignee = !this.displayAssignee;
+  async onSubmit() {
+    if (this.formText.valid) {
+      const notebll = new NoteBLL();
+      await notebll.insert(
+        this.db,
+        this.formText.value.title,
+        this.type,
+        this.formText.value.description
+      );
+      this.opened = false;
+    } else {
+      this.opened = false;
+    }
   }
-
-  async onSubmit(f: NgForm) {}
 }
