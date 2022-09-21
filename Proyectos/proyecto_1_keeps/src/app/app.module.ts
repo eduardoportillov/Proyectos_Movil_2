@@ -22,7 +22,6 @@ import { NoteCreateComponent } from './components/note-create/note-create.compon
     IonicModule.forRoot(),
     AppRoutingModule,
     // BrowserAnimationsModule,
-    FormsModule,
     // ComponentsModule
   ],
   // exports: [FormsModule, IonicModule],

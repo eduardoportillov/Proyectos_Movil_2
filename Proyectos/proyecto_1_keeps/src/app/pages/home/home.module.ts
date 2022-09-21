@@ -14,7 +14,8 @@ import { NoteCreateComponent } from 'src/app/components/note-create/note-create.
     CommonModule,
     FormsModule,
     IonicModule,
-    HomePageRoutingModule
+    HomePageRoutingModule,
+    FormsModule,
   ],
   declarations: [HomePage, NoteCardComponent]
 })

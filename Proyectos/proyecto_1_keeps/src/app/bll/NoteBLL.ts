@@ -36,6 +36,7 @@ export class NoteBLL {
             notes.push(row);
           }
         }
+        console.log('Executed SQL: SELECT * FROM notes');
       })
       .catch((e) => console.log(`Error en el selectAll`, e));
 

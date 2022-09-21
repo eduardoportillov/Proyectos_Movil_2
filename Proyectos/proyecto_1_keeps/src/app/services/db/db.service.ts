@@ -34,7 +34,7 @@ export class DbService {
         'create table if not exists notes(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL, description TEXT, type TEXT NOT NULL, color TEXT)',
         []
       )
-      .then(() => console.log('Executed SQL'))
+      .then(() => console.log('Executed SQL: create table notes'))
       .catch((e) => console.log('Create notes error:' + 'title:' +e.title + ' Message: ' + e.message));
 
       await this.database
@@ -43,7 +43,7 @@ export class DbService {
         'create table if not exists todos(id INTEGER PRIMARY KEY AUTOINCREMENT, content TEXT NOT NULL, checked BOOLEAN NOT NULL, note_id INTEGER, CONSTRAINT fk_notes foreign key(note_id) references note(id) ON DELETE CASCADE)',
         []
       )
-      .then(() => console.log('Executed SQL'))
+      .then(() => console.log('Executed SQL: create table todos'))
       .catch((e) => console.log('Create todos error:' + 'title:' +e.title + ' Message: ' + e.message));
 
   }

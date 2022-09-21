@@ -16,12 +16,14 @@ export class NoteCardComponent implements OnInit {
   todoBLL = new TodoBLL();
 
   constructor(private db: DbService) {
-    if (this.note.type === 'todo') {
-      this.loadTodo(this.note.id);
-    }
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log('debbuger note ' + this.note.title);
+    // if (this.note.type === 'todo') {
+    //   this.loadTodo(this.note.id);
+    // }
+  }
 
   async loadTodo(noteId: number) {
     const todobll = new TodoBLL();
