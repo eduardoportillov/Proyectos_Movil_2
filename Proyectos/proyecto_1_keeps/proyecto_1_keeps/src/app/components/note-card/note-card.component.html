@@ -1,4 +1,4 @@
-<div *ngIf="note" (click)="onClick(note.id)">
+<div *ngIf="note" (click)="onClick(note.id)" [ngStyle]="{'background-color':color}">
   <h1 *ngIf="note.title">{{note.id}} - {{ note.title }}</h1>
 
   <ion-item *ngIf="note.type === 'text'">

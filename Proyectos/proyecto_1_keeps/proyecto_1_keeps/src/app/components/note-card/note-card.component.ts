@@ -15,9 +15,13 @@ export class NoteCardComponent implements OnInit {
 
   todoBLL = new TodoBLL();
 
+  color: string;
+
   constructor(private db: DbService) {}
 
   ngOnInit() {
+    console.log(this.note);
+    this.color = this.note.color;
     if (this.note.type === 'todo') {
       this.loadTodo(this.note.id);
     }

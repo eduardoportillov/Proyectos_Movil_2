@@ -45,7 +45,8 @@ export class NoteCreateComponent implements OnInit {
           this.db,
           this.formText.value.title,
           this.type,
-          this.formText.value.description
+          this.formText.value.description,
+          '#fdfd96'
         );
       }
 

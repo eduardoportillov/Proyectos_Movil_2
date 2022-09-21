@@ -12,14 +12,14 @@ import { DbService } from 'src/app/services/db/db.service';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
-  notes: Note[] = [];
+  notes: Note[];
   notaBLL = new NoteBLL();
   todoBLL = new TodoBLL();
 
   textoBuscar= '';
 
   constructor(private db: DbService, private popoverController: PopoverController) {
-    // this.notaBLL.insert(this.db, 'Prueba text', 'texto', 'este es una nota de texto');
+    // this.notaBLL.insert(this.db, 'Prueba text', 'texto', 'este es una nota de texto', 'fff');
     // this.notaBLL.insert(this.db, 'Prueba Todo', 'todo');
     // this.todoBLL.insert(this.db, '1 todo', false, 17);
     // this.todoBLL.insert(this.db, '2 todo', false, 17);
@@ -41,7 +41,7 @@ export class HomePage implements OnInit {
   }
 
   async mostrarPop(){
-    const popOver = await this.popoverController.create({component: ExportNoteComponent});
+    const popOver = await this.popoverController.create({component: ExportNoteComponent, componentProps: {notes: this.notes}});
     await popOver.present();
   }
 

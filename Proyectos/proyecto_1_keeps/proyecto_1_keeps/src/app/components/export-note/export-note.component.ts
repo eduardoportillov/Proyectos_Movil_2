@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { DbService } from 'src/app/services/db/db.service';
+import { HttpNoteService } from 'src/app/services/http/http-note.service';
+import { NoteBLL } from 'src/app/bll/NoteBLL';
+import { Note } from 'src/app/models/Note';
 
 @Component({
   selector: 'app-export-note',
@@ -6,11 +10,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./export-note.component.scss'],
 })
 export class ExportNoteComponent implements OnInit {
+  @Input() notes: Note[];
+  nroNotas: number;
 
-  nroNotas = 0;
+  constructor(private api: HttpNoteService) {}
 
-  constructor() { }
+  ngOnInit() {
+    this.fetchPostCountNote();
+  }
 
-  ngOnInit() {}
-
+  fetchPostCountNote() {
+    this.api.postCountNote(this.notes).subscribe((data) => {
+      console.log(data);
+      this.nroNotas = data;
+    });
+  }
 }
