@@ -29,15 +29,26 @@ export class NoteCreateComponent implements OnInit {
     this.opened = true;
   }
 
+  onTodo() {
+    this.type = 'todo';
+  }
+
+  onText() {
+    this.type = 'text';
+  }
+
   async onSubmit() {
     if (this.formText.valid) {
-      const notebll = new NoteBLL();
-      await notebll.insert(
-        this.db,
-        this.formText.value.title,
-        this.type,
-        this.formText.value.description
-      );
+      if (this.type === 'text') {
+        const notebll = new NoteBLL();
+        await notebll.insert(
+          this.db,
+          this.formText.value.title,
+          this.type,
+          this.formText.value.description
+        );
+      }
+
       this.opened = false;
     } else {
       this.opened = false;

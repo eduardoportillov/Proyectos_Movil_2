@@ -12,7 +12,7 @@ export class TodoBLL {
     if (!db.database) {
       await db.createDb();
     }
-    const sqlText = `INSERT INTO todos(content, checked, note_id) VALUES (?,?,?,?)`;
+    const sqlText = `INSERT INTO todos(content, checked, note_id) VALUES (?,?,?)`;
 
     return await db.database
       .executeSql(sqlText, [content, checked, note_id])
@@ -24,7 +24,7 @@ export class TodoBLL {
       await db.createDb();
     }
     const sqlText = `SELECT * FROM todos where note_id = ?`;
-    let todo: Todo[];
+    const todo: Todo[] = [];
 
     await db.database
       .executeSql(sqlText, [id])
@@ -36,7 +36,7 @@ export class TodoBLL {
           }
         }
       })
-      .catch((e) => console.log(`Error en el selectById`, e));
+      .catch((e) => console.log(`Error en el selectByNote`, e));
 
     return todo;
   }
@@ -59,22 +59,18 @@ export class TodoBLL {
     return responseDB;
   }
 
-  async checked(db: DbService, id: number, checked: boolean) {
+  async updateChecked(db: DbService, id: number, checked: boolean) {
     if (!db.database) {
       await db.createDb();
     }
-    const sqlText = `update todos set checked= ? WHERE id = ?;`;
-    let responseDB: any;
+    const sqlText = `UPDATE todos SET checked= ? WHERE id = ?`;
 
     await db.database
       .executeSql(sqlText, [checked, id])
       .then((res) => {
-        responseDB = res;
-        console.log(`Todos Actualizados`, res);
+        console.log(`Todos Actualizados ${res.rowsAffected} + checked: ${checked}`);
       })
       .catch((e) => console.log(`Error al Actualizar`, e));
-
-    return responseDB;
   }
 
   async delete(db: DbService, id: number) {

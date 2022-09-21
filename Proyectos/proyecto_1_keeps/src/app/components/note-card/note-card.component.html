@@ -1,5 +1,5 @@
 <div *ngIf="note" (click)="onClick(note.id)">
-  <h1 *ngIf="note.title">{{ note.title }}</h1>
+  <h1 *ngIf="note.title">{{note.id}} - {{ note.title }}</h1>
 
   <ion-item *ngIf="note.type === 'text'">
     <ion-label>
@@ -9,9 +9,9 @@
 
   <ion-list *ngIf="note.type === 'todo'">
     <ion-item *ngFor="let todo of todos">
-      <ion-checkbox slot="start">
-        <ion-label>{{ todo.content }}</ion-label>
-      </ion-checkbox>
+      <ion-checkbox checked="{{todo.checked}}" slot="start" (click)="onChecked(todo)"></ion-checkbox>
+      <ion-label *ngIf="todo.checked">{{ todo.content }}</ion-label>
+      <ion-label *ngIf="todo.checked"><del>{{ todo.content }}</del></ion-label>
     </ion-item>
   </ion-list>
 

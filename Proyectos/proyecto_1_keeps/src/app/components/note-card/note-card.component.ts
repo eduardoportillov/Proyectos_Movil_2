@@ -18,9 +18,17 @@ export class NoteCardComponent implements OnInit {
   constructor(private db: DbService) {}
 
   ngOnInit() {
-    console.log('debbuger note ' + this.note.title);
     if (this.note.type === 'todo') {
       this.loadTodo(this.note.id);
+    }
+  }
+
+  async onChecked(todo: Todo) {
+    const todobll = new TodoBLL();
+    if (todo.checked === true) {
+      await todobll.updateChecked(this.db, todo.id, false);
+    } else {
+      await todobll.updateChecked(this.db, todo.id, true);
     }
   }
 
@@ -31,6 +39,5 @@ export class NoteCardComponent implements OnInit {
 
   onClick(id: number) {
     // this.noteUpdateDialogService.showDialog(this.note);
-    console.log('clicked '+id);
   }
 }

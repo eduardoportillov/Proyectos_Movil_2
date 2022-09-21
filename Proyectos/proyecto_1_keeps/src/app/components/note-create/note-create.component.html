@@ -1,5 +1,6 @@
 <form #f="ngForm" (ngSubmit)="onSubmit()" [formGroup]="formText">
   <div *ngIf="type === 'text'">
+    <br />
     <ion-input
       type="text"
       formControlName="title"
@@ -15,7 +16,19 @@
       rows="1"
       (focus)="onBodyFocus()"
     ></textarea>
-    <br>
+    <br />
     <ion-button type="submit" value="Close" *ngIf="opened">Cerrar</ion-button>
+    <ion-item *ngIf="opened">
+      <ion-checkbox (click)="onTodo()"></ion-checkbox>
+      <ion-label> Nota Todo</ion-label>
+    </ion-item>
+  </div>
+
+  <div *ngIf="type === 'todo'">
+    
+    <ion-item *ngIf="opened">
+      <ion-checkbox (click)="onText()"></ion-checkbox>
+      <ion-label> Nota Texto</ion-label>
+    </ion-item>
   </div>
 </form>
