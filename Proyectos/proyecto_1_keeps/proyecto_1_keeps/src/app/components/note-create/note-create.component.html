@@ -7,7 +7,8 @@
       placeholder="Title"
       *ngIf="opened"
       ngModel
-    ></ion-input>
+    >
+    </ion-input>
     <textarea
       name="description"
       formControlName="description"
@@ -16,6 +17,12 @@
       rows="1"
       (focus)="onBodyFocus()"
     ></textarea>
+    <br>
+    <ion-select *ngIf="opened" placeholder="Select Color" interface="popover" (ionChange)="setColorOption($event)">
+      <ion-select-option value="#e06668">Rojo</ion-select-option>
+      <ion-select-option value="#fdfd96">Amarillo</ion-select-option>
+      <ion-select-option value="#99f5bc">Verde</ion-select-option>
+    </ion-select>
     <br />
     <ion-button type="submit" value="Close" *ngIf="opened">Cerrar</ion-button>
     <ion-item *ngIf="opened">
@@ -25,8 +32,8 @@
   </div>
 
   <div *ngIf="type === 'todo'">
-    
     <ion-item *ngIf="opened">
+      
       <ion-checkbox (click)="onText()"></ion-checkbox>
       <ion-label> Nota Texto</ion-label>
     </ion-item>

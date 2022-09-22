@@ -16,6 +16,8 @@ export class NoteCreateComponent implements OnInit {
 
   notaBLL = new NoteBLL();
 
+  color: string;
+
   constructor(private db: DbService) {}
 
   ngOnInit() {
@@ -37,6 +39,10 @@ export class NoteCreateComponent implements OnInit {
     this.type = 'text';
   }
 
+  setColorOption(e) {
+    this.color = e.detail.value;
+  }
+
   async onSubmit() {
     if (this.formText.valid) {
       if (this.type === 'text') {
@@ -46,7 +52,7 @@ export class NoteCreateComponent implements OnInit {
           this.formText.value.title,
           this.type,
           this.formText.value.description,
-          '#fdfd96'
+          this.color
         );
       }
 

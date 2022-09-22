@@ -21,7 +21,6 @@ export class ExportNoteComponent implements OnInit {
 
   fetchPostCountNote() {
     this.api.postCountNote(this.notes).subscribe((data) => {
-      console.log(data);
       this.nroNotas = data;
     });
   }
