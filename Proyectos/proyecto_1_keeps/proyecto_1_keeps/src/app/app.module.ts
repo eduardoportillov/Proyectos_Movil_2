@@ -9,6 +9,8 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { SQLite } from '@awesome-cordova-plugins/sqlite/ngx';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { NoteUpdateComponent } from './components/note-update/note-update.component';
 
 @NgModule({
   declarations: [AppComponent],
@@ -16,7 +18,8 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },

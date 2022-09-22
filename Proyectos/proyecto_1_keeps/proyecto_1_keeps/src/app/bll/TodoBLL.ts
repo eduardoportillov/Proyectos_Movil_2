@@ -64,14 +64,17 @@ export class TodoBLL {
       await db.createDb();
     }
     const sqlText = `UPDATE todos SET checked= ? WHERE id = ?`;
-
+    let validateChecked: number;
+    // eslint-disable-next-line prefer-const
+    validateChecked = checked === true ? 0 : 1;
     await db.database
-      .executeSql(sqlText, [checked, id])
+      .executeSql(sqlText, [validateChecked, id])
       .then((res) => {
-        console.log(`Todos Actualizados ${res.rowsAffected} + checked: ${checked}`);
+        console.log(`Todos Actualizados ${res.rowsAffected} + checked: ${validateChecked}`);
       })
       .catch((e) => console.log(`Error al Actualizar`, e));
   }
+
 
   async delete(db: DbService, id: number) {
     if (!db.database) {

@@ -1,7 +1,7 @@
 export interface Todo {
-  id: number;
+  id?: number;
   content: string;
   checked: boolean;
   // eslint-disable-next-line @typescript-eslint/naming-convention
-  note_id: number;
+  note_id?: number;
 }

@@ -9,6 +9,7 @@ import { NoteCardComponent } from 'src/app/components/note-card/note-card.compon
 import { NoteCreateComponent } from 'src/app/components/note-create/note-create.component';
 import { PipesModule } from 'src/app/pipes/pipes.module';
 import { ExportNoteComponent } from 'src/app/components/export-note/export-note.component';
+import { NoteUpdateComponent } from 'src/app/components/note-update/note-update.component';
 
 
 @NgModule({
@@ -20,6 +21,6 @@ import { ExportNoteComponent } from 'src/app/components/export-note/export-note.
     HomePageRoutingModule,
     ReactiveFormsModule,
   ],
-  declarations: [HomePage, NoteCardComponent, NoteCreateComponent, ExportNoteComponent]
+  declarations: [HomePage, NoteCardComponent, NoteCreateComponent, ExportNoteComponent, NoteUpdateComponent]
 })
 export class HomePageModule {}

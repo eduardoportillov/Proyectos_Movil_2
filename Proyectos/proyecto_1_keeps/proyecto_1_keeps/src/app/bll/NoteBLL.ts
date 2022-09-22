@@ -13,10 +13,13 @@ export class NoteBLL {
       await db.createDb();
     }
     const sqlText = `INSERT INTO notes(title, description, type, color) VALUES (?,?,?,?)`;
-
-    return await db.database
+    let insertId: number;
+    await db.database
       .executeSql(sqlText, [title, description, type, color])
+      .then((res) => (insertId = res.insertId))
       .catch((e) => console.log(`Error en el insert`, e));
+
+    return insertId;
   }
 
   async selectAll(db: DbService) {
@@ -97,7 +100,7 @@ export class NoteBLL {
     let responseDB: any;
 
     await db.database
-      .executeSql(sqlText, [title,description,color, id])
+      .executeSql(sqlText, [title, description, color, id])
       .then((res) => {
         responseDB = res;
         console.log(`Note deleted`, res);

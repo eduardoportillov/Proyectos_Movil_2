@@ -1,5 +1,5 @@
-<div *ngIf="note" (click)="onClick(note.id)" [ngStyle]="{'background-color':color}">
-  <h1 *ngIf="note.title">{{note.id}} - {{ note.title }}</h1>
+<div *ngIf="note" (click)="mostrarPopEditNote()" [ngStyle]="{'background-color': note.color}">
+  <h1 *ngIf="note.title" [ngStyle]="{'background-color': note.color}">{{ note.id }} - {{ note.title }}</h1>
 
   <ion-item *ngIf="note.type === 'text'">
     <ion-label>
@@ -7,12 +7,19 @@
     </ion-label>
   </ion-item>
 
-  <ion-list *ngIf="note.type === 'todo'">
-    <ion-item *ngFor="let todo of todos">
-      <ion-checkbox checked="{{todo.checked}}" slot="start" (click)="onChecked(todo)"></ion-checkbox>
-      <ion-label *ngIf="todo.checked">{{ todo.content }}</ion-label>
-      <ion-label *ngIf="todo.checked"><del>{{ todo.content }}</del></ion-label>
-    </ion-item>
-  </ion-list>
-
+  <ul *ngIf="note.type === 'todo'">
+    <li
+      *ngFor="let todo of todos; let indice = index"
+      [class.tachado]="todo.checked === true"
+    >
+      <input
+        [(ngModel)]="todo.checked"
+        type="checkbox"
+        (click)="onChecked(todo)"
+        [value]="todo.content"
+      />
+      {{ todo.content }}
+      <!-- <a  (click)="eliminarTarea(indice)" class="enlace-eliminar">&times;</a> -->
+    </li>
+  </ul>
 </div>

@@ -13,10 +13,14 @@ export class FilterPipe implements PipeTransform {
     text = text.toLowerCase();
 
     return notes.filter((note) => {
-      if (!note.description) {
-        note.title.toLowerCase().includes(text);
+      if (note.title.toLowerCase().includes(text)) {
+        return note.title.toLowerCase().includes(text);
       } else {
-        return note.description.toLowerCase().includes(text);
+        if (note.type === 'text') {
+          return note.description.toLowerCase().includes(text);
+        }else{
+          // return note.todos.find(todo => todo.content.toLowerCase().includes(text));
+        }
       }
     });
   }

@@ -16,18 +16,21 @@ export class HomePage implements OnInit {
   notaBLL = new NoteBLL();
   todoBLL = new TodoBLL();
 
-  textoBuscar= '';
+  textoBuscar = '';
 
-  constructor(private db: DbService, private popoverController: PopoverController) {
+  constructor(
+    private db: DbService,
+    private popoverController: PopoverController
+  ) {
     // this.notaBLL.insert(this.db, 'Prueba text', 'texto', 'este es una nota de texto', 'fff');
-    // this.notaBLL.insert(this.db, 'Prueba Todo', 'todo');
-    // this.todoBLL.insert(this.db, '1 todo', false, 17);
-    // this.todoBLL.insert(this.db, '2 todo', false, 17);
-    // this.todoBLL.insert(this.db, '3 todo', false, 17);
-    // this.todoBLL.insert(this.db, '5 todo', true, 17);
+    // this.notaBLL.insert(this.db, 'Prueba Todo', 'todo', '#0000ff');
+    // this.todoBLL.insert(this.db, '1 todo', false, 33);
+    // this.todoBLL.insert(this.db, '2 todo', false, 33);
+    // this.todoBLL.insert(this.db, '3 todo', false, 33);
+    // this.todoBLL.insert(this.db, '5 todo', true, 33);
   }
 
-  ngOnInit(){
+  ngOnInit() {
     this.loadNotas();
   }
 
@@ -40,8 +43,11 @@ export class HomePage implements OnInit {
     }, 2000);
   }
 
-  async mostrarPop(){
-    const popOver = await this.popoverController.create({component: ExportNoteComponent, componentProps: {notes: this.notes}});
+  async mostrarPopExport() {
+    const popOver = await this.popoverController.create({
+      component: ExportNoteComponent,
+      componentProps: { notes: this.notes },
+    });
     await popOver.present();
   }
 

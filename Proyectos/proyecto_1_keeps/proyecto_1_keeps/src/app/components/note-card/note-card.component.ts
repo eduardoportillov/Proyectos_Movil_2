@@ -1,8 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { PopoverController } from '@ionic/angular';
 import { TodoBLL } from 'src/app/bll/TodoBLL';
 import { Note } from 'src/app/models/Note';
 import { Todo } from 'src/app/models/Todo';
 import { DbService } from 'src/app/services/db/db.service';
+import { ExportNoteComponent } from '../export-note/export-note.component';
+import { NoteUpdateComponent } from '../note-update/note-update.component';
 
 @Component({
   selector: 'app-note-card',
@@ -17,7 +20,10 @@ export class NoteCardComponent implements OnInit {
 
   color: string;
 
-  constructor(private db: DbService) {}
+  constructor(
+    private db: DbService,
+    private popoverController: PopoverController
+  ) {}
 
   ngOnInit() {
     this.color = this.note.color;
@@ -28,19 +34,23 @@ export class NoteCardComponent implements OnInit {
 
   async onChecked(todo: Todo) {
     const todobll = new TodoBLL();
-    if (todo.checked === true) {
-      await todobll.updateChecked(this.db, todo.id, false);
-    } else {
-      await todobll.updateChecked(this.db, todo.id, true);
-    }
+    await todobll.updateChecked(this.db, todo.id, todo.checked);
+    console.log(todo);
   }
 
   async loadTodo(noteId: number) {
     const todobll = new TodoBLL();
     this.todos = await todobll.selectByNote(this.db, noteId);
+    this.todos.forEach((todo) => {
+      todo.checked = todo.checked as unknown === 1 ? true : false;
+    });
   }
 
-  onClick(id: number) {
-    // this.noteUpdateDialogService.showDialog(this.note);
+  async mostrarPopEditNote() {
+    const popOver = await this.popoverController.create({
+      component: NoteUpdateComponent,
+      componentProps: { note: this.note },
+    });
+    await popOver.present();
   }
 }
