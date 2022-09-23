@@ -17,6 +17,8 @@ export class NoteUpdateComponent implements OnInit {
   constructor(private db: DbService) {}
 
   ngOnInit() {
+    this.title = this.note.title;
+    this.description = this.note.description;
     this.color = this.note.color;
   }
 

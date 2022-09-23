@@ -1,39 +1,21 @@
-<form *ngIf="note.type === 'text'" #f="ngForm" (ngSubmit)="onSubmit()">
-  <div>
-    <br />
-    <ion-item>
-      <ion-input
-        type="text"
-        formControlName="title"
-        placeholder="Title"
-        [(ngModel)]="title"
-        value="{{ note.title }}"
-      >
-      </ion-input>
-    </ion-item>
-    <ion-item>
-      <textarea
-        name="description"
-        formControlName="description"
-        id="description"
-        [value]="note.description"
-        [(ngModel)]="description"
-        rows="1"
-        >{{ note.description }}</textarea
-      >
-    </ion-item>
+<div>
+  <ion-item>
+    <input type="text" [(ngModel)]="title" />
+  </ion-item>
+  <ion-item>
+    <input type="text" [(ngModel)]="description" />
+  </ion-item>
 
-    <ion-item>
-      <ion-select
-        placeholder="Select Color"
-        interface="popover"
-        (ionChange)="setColorOption($event)"
-      >
-        <ion-select-option value="#e06668">Rojo</ion-select-option>
-        <ion-select-option value="#fdfd96">Amarillo</ion-select-option>
-        <ion-select-option value="#99f5bc">Verde</ion-select-option>
-      </ion-select>
-    </ion-item>
-  </div>
-  <ion-button type="submit" value="Close">Actualizar</ion-button>
-</form>
+  <ion-item>
+    <ion-select
+      placeholder="Select Color"
+      interface="popover"
+      (ionChange)="setColorOption($event)"
+    >
+      <ion-select-option value="#e06668">Rojo</ion-select-option>
+      <ion-select-option value="#fdfd96">Amarillo</ion-select-option>
+      <ion-select-option value="#99f5bc">Verde</ion-select-option>
+    </ion-select>
+  </ion-item>
+</div>
+<ion-button type="button" (click)="onSubmit()">Actualizar</ion-button>
