@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:proyecto_2_buscador_movies/models/MovieDB.dart';
 import 'package:proyecto_2_buscador_movies/models/movie.dart';
+import 'package:proyecto_2_buscador_movies/pages/info_movie_page.dart';
 
 import '../bll/movie_bll.dart';
 import '../models/ResponseApiMovie.dart';
@@ -137,8 +138,10 @@ class _SearchMovieState extends State<SearchMovie> {
                 await CreateMovieInDB(movie);
 
                 // ignore: use_build_context_synchronously
-                // Navigator.pushNamed(context, '/infomovie',
-                //     arguments: movie?.id);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => InfoMovie(movie.id)));
               }
             },
           );
@@ -155,16 +158,19 @@ class _SearchMovieState extends State<SearchMovie> {
         urlImage = "https://tytenlinea.com/wp-content/uploads/2016/03/NO.png";
       }
 
+      String genderString = movie.genres.map((e) => e.name).join(", ");
+
       if (value == null) {
         MovieDB movieDB = MovieDB(
-            id: movie.id,
-            title: movie.title,
-            age: movie.releaseDate,
-            runtime: movie.runtime,
-            gender: movie.genres.toString(),
-            poster_path: urlImage,
-            overview: movie.overview,
-            user_score: movie.voteAverage.toString());
+          id: movie.id,
+          title: movie.title,
+          age: movie.releaseDate,
+          runtime: movie.runtime,
+          gender: genderString,
+          poster_path: urlImage,
+          overview: movie.overview,
+          user_score: movie.voteAverage.toString(),
+        );
 
         MovieDbBLL.insertMovieDB(movieDB);
       }

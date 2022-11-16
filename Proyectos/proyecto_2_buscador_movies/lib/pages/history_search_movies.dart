@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../bll/movie_bll.dart';
 import '../models/MovieDB.dart';
+import 'info_movie_page.dart';
 
 class HistorySearchMovies extends StatefulWidget {
   const HistorySearchMovies({super.key});
@@ -43,6 +44,13 @@ Widget getListView(List<MovieDB> listaMovieDBs) {
         leading: Image.network(listaMovieDBs[index].poster_path ?? ""),
         title: Text(listaMovieDBs[index].title ?? ""),
         subtitle: Text(listaMovieDBs[index].overview ?? ""),
+        onTap: () {
+          // ignore: use_build_context_synchronously
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => InfoMovie(listaMovieDBs[index].id)));
+        },
       );
     },
   );

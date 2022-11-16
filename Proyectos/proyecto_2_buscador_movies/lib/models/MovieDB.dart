@@ -34,7 +34,7 @@ class MovieDB {
         gender: json["gender"],
         poster_path: json["poster_path"],
         overview: json["overview"],
-        user_score: json["timestamp"],
+        user_score: json["user_score"],
       );
 
   Map<String, dynamic> toJson() => {

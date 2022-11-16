@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
         "/": (context) => const SearchMovie(
               title: 'Buscador de Películas',
             ),
-        "/infomovie": (context) => const InfoMovie(),
+        "/infomovie": (context) => const InfoMovie(null),
         "/historySearchMovies": (context) => const HistorySearchMovies(),
       },
     );
