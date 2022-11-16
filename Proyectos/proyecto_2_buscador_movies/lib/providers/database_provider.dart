@@ -19,17 +19,15 @@ class DatabaseProvider {
     String path = join(documentsDirectory.path, "dbmovies.db");
     return await openDatabase(path, version: 1, onOpen: (db) {},
         onCreate: (Database db, int version) async {
-      await db.execute("CREATE TABLE history_search_movie ("
-          "id INTEGER PRIMARY KEY AUTOINCREMENT,"
+      await db.execute("CREATE TABLE IF NOT EXISTS history_search_movie ("
+          "id INTEGER PRIMARY KEY,"
           "title TEXT,"
           "age TEXT,"
           "runtime INTEGER,"
           "gender TEXT,"
-          "director TEXT,"
+          "poster_path TEXT,"
           "overview TEXT,"
-          "image_url TEXT,"
-          "user_score TEXT,"
-          "timestamp TEXT"
+          "user_score TEXT"
           ")");
     });
   }

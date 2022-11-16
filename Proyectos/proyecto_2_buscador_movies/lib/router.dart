@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:proyecto_2_buscador_movies/pages/history_search_movies.dart';
 import 'package:proyecto_2_buscador_movies/pages/info_movie_page.dart';
 import 'package:proyecto_2_buscador_movies/pages/search_movie_page.dart';
 
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
               title: 'Buscador de Películas',
             ),
         "/infomovie": (context) => const InfoMovie(),
+        "/historySearchMovies": (context) => const HistorySearchMovies(),
       },
     );
   }
