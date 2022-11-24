@@ -59,7 +59,7 @@ class Result {
     required this.voteCount,
   });
 
-  bool adult;
+  bool? adult;
   String? backdropPath;
   List<int> genreIds;
   int id;
