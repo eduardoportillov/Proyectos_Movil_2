@@ -1,0 +1,27 @@
+* {
+    font-family: "Gotham", sans-serif;
+  }
+  ion-toolbar {
+    ion-item {
+      --background: #37bcff;
+      color: white;
+      font-weight: 600;
+      font-size: 20px;
+    }
+    --background: #37bcff;
+  }
+  ion-item {
+    font-size: 18px;
+  }
+  ion-label {
+    display: flex !important;
+    //align-items: end !important;
+  }
+  ion-icon {
+    color: var(--ion-color-btn-principal);
+    font-size: 25px;
+    margin-right: 10px;
+  }
+  ion-toolbar .ios {
+    padding-top: env(safe-area-inset-top);
+  }

@@ -1,0 +1,64 @@
+<ion-content class="fondo">
+  <ion-grid>
+    <ion-row class="row-logo">
+      <ion-col>
+        <div style="text-align: center">
+          <img src="../../../assets/icon/user-solid.svg" width="150" />
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row class="row-card">
+      <ion-col>
+        <ion-card id="card" class="sombra-card">
+          <ion-card-content>
+            <form [formGroup]="formLogin">
+              <ion-item lines="none">
+                <ion-input
+                  type="text"
+                  formControlName="email"
+                  style="width: 100%"
+                  placeholder="Email"
+                >
+                </ion-input>
+              </ion-item>
+              <ion-item lines="none">
+                <ion-input
+                  formControlName="password"
+                  type="text"
+                  type="password"
+                  style="width: 100%"
+                  placeholder="Contraseña"
+                >
+                </ion-input>
+              </ion-item>
+            </form>
+            <div style="display: flex; justify-content: center">
+              <button
+                id="btn-ingresar"
+                class="sombra"
+                (click)="login()"
+                [disabled]="this.formLogin.value.email === '' || this.formLogin.value.password === ''"
+              >
+                INGRESAR
+              </button>
+            </div>
+            <div
+              class="div-botones"
+              style="
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-top: 10px;
+              "
+            ></div>
+          </ion-card-content>
+        </ion-card>
+        <div class="centro">
+          <a [routerLink]="['/register']">
+            ¿No tienes cuenta? <strong>Regístrate aquí</strong>
+          </a>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

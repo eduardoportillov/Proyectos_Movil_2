@@ -1,7 +1,7 @@
 import { DOCUMENT } from '@angular/common';
 import { Component, ElementRef, Inject, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { GooglemapsService } from './googlemaps.service';
+import { GooglemapsService } from 'src/app/services/googlemaps.service';
 
 declare var google: any;
 
@@ -50,7 +50,7 @@ export class GooglemapsComponent implements OnInit {
     let mapOptions = {
       center: latLng,
       zoom: 15,
-      disableDefaultUI: false,
+      disableDefaultUI: true,
       clickableIcons: false,
     };
 

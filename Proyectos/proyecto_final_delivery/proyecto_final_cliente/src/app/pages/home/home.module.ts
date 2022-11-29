@@ -5,7 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
-import { GooglemapsModule } from '../googlemaps/googlemaps.module';
+import { GooglemapsModule } from '../../components/googlemaps/googlemaps.module';
+import { PopoverMenuModule } from 'src/app/components/popover-menu/popover-menu.module';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { GooglemapsModule } from '../googlemaps/googlemaps.module';
     FormsModule,
     IonicModule,
     HomePageRoutingModule,
-    GooglemapsModule
+    GooglemapsModule,
+    PopoverMenuModule
   ],
   declarations: [HomePage]
 })

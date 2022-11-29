@@ -1,0 +1,84 @@
+<ion-content class="fondo">
+  <ion-grid>
+    <ion-row class="row-logo">
+      <ion-col>
+        <div style="text-align: center">
+          <img src="../../../assets/icon/user-solid.svg" width="150" />
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row class="row-card">
+      <ion-col>
+        <ion-card id="card" class="sombra-card">
+          <ion-card-content>
+            <form [formGroup]="formRegister">
+              <ion-item lines="none">
+                <ion-input
+                  type="text"
+                  formControlName="name"
+                  style="width: 100%"
+                  placeholder="Nombre"
+                >
+                </ion-input>
+              </ion-item>
+
+              <ion-item lines="none">
+                <ion-input
+                  type="text"
+                  formControlName="lastname"
+                  style="width: 100%"
+                  placeholder="Apellido"
+                >
+                </ion-input>
+              </ion-item>
+              <ion-item lines="none">
+                <ion-input
+                  type="text"
+                  formControlName="email"
+                  style="width: 100%"
+                  placeholder="Email"
+                >
+                </ion-input>
+              </ion-item>
+
+              <ion-item lines="none">
+                <ion-input
+                  formControlName="password"
+                  type="text"
+                  type="password"
+                  style="width: 100%"
+                  placeholder="Contraseña"
+                >
+                </ion-input>
+              </ion-item>
+            </form>
+            <div style="display: flex; justify-content: center">
+              <button
+                id="btn-ingresar"
+                class="sombra"
+                (click)="register()"
+                [disabled]="this.formRegister.value.email === '' || this.formRegister.value.password === ''"
+              >
+                INGRESAR
+              </button>
+            </div>
+            <div
+              class="div-botones"
+              style="
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-top: 10px;
+              "
+            ></div>
+          </ion-card-content>
+        </ion-card>
+        <div class="centro">
+          <a [routerLink]="['/login']">
+            ¿tienes cuenta? <strong>Inicia Sesión aquí</strong>
+          </a>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
