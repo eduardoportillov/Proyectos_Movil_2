@@ -1,6 +1,13 @@
 import { DOCUMENT } from '@angular/common';
-import { Component, ElementRef, Inject, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import {
+  Component,
+  ElementRef,
+  Inject,
+  Input,
+  OnInit,
+  Renderer2,
+  ViewChild,
+} from '@angular/core';
 import { GooglemapsService } from 'src/app/services/googlemaps.service';
 
 declare var google: any;
@@ -11,21 +18,27 @@ declare var google: any;
   styleUrls: ['./googlemaps.component.scss'],
 })
 export class GooglemapsComponent implements OnInit {
-  @Input() position = { lat: 51.678418, lng: 7.809007 };
+  originMarker: any;
 
-  label = { title: 'My Location', subtitle: 'My Subtitle' };
+  _positionOrigen: any = null;
+  positionDestino: any = null;
+
+  @Input()
+  set positionOrigen(position: any) {
+    this._positionOrigen = position;
+    this.addMarker(position, 'Origen');
+  }
+
   map: any;
-  marker: any;
   infoWindow: any;
   positionSet: any;
 
-  @ViewChild('map') divMap: ElementRef | undefined;
+  @ViewChild('map') divMap?: ElementRef;
 
   constructor(
     private renderer: Renderer2,
     @Inject(DOCUMENT) private document: any,
-    private googlemapsService: GooglemapsService,
-    public modalController: ModalController
+    private googlemapsService: GooglemapsService
   ) {}
 
   ngOnInit(): void {
@@ -36,6 +49,7 @@ export class GooglemapsComponent implements OnInit {
     this.googlemapsService
       .init(this.renderer, this.document)
       .then(() => {
+        console.log('Google maps ready');
         this.initMap();
       })
       .catch((err) => {
@@ -44,61 +58,29 @@ export class GooglemapsComponent implements OnInit {
   }
 
   initMap() {
-    const position = this.position;
-    let latLng = new google.maps.LatLng(position.lat, position.lng);
-
     let mapOptions = {
-      center: latLng,
+      center: { lat: -17.783779885678957, lng: -63.18217975277995 },
       zoom: 15,
-      disableDefaultUI: true,
+      disableDefaultUI: false,
       clickableIcons: false,
     };
 
     this.map = new google.maps.Map(this.divMap?.nativeElement, mapOptions);
-    this.marker = new google.maps.Marker({
+    this.originMarker = new google.maps.Marker({
       map: this.map,
-      animation: google.maps.Animation.DROP,
-      draggable: true,
-    });
-    this.clickHandlerEvent();
-    this.infoWindow = new google.maps.InfoWindow();
-    this.addMarker(position);
-  }
-
-  clickHandlerEvent() {
-    this.map.addListener('click', (event: any) => {
-      const position = {
-        lat: event.latLng.lat(),
-        lng: event.latLng.lng(),
-      };
-      this.addMarker(position);
+      icon: {
+        url: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
+      },
     });
   }
 
-  addMarker(position: any): void {
-    let latLng = new google.maps.LatLng(position.lat, position.lng);
+  addMarker(position: any, destiny: string): void {
+    if (destiny == 'Origen') {
+      let latLng = new google.maps.LatLng(position.lat, position.lng);
 
-    this.marker.setPosition(latLng);
-    this.map.panTo(position);
-    this.positionSet = position;
-  }
-
-  setInfoWindow(marker: any, title: string, subtitle: string): void {
-    const contentString =
-      '<div id="contentInsideMap">' +
-      '<div>' +
-      '</div>' +
-      '<p style="font-weight: bold; margin-bottom: 5px;">' +
-      title +
-      '</p>' +
-      '<div id="bodyContent">' +
-      '<p class"normal m-0">' +
-      subtitle +
-      '</p>' +
-      '</div>' +
-      '</div>';
-
-    this.infoWindow.setContent(contentString);
-    this.infoWindow.open(this.map, marker);
+      this.originMarker.setPosition(latLng);
+      this.map.panTo(position);
+      this.positionSet = position;
+    }
   }
 }

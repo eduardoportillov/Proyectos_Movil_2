@@ -39,7 +39,11 @@ export class LoginPage implements OnInit {
     });
   }
 
-  ngOnInit() {}
+  async ngOnInit() {
+    if (await Preferences.get({ key: 'token' })) {
+      this.router.navigate(['/home']);
+    }
+  }
 
   async login() {
     const valuesForm = this.formLogin.value;
@@ -81,7 +85,10 @@ export class LoginPage implements OnInit {
 
       (error) => {
         loading.dismiss();
-        this.mostrarAlerta('Error', `Usuario y/o contraseña incorrectos Message Server: ${error.statusText}`);
+        this.mostrarAlerta(
+          'Error',
+          `Usuario y/o contraseña incorrectos Message Server: ${error.statusText}`
+        );
       }
     );
   }
