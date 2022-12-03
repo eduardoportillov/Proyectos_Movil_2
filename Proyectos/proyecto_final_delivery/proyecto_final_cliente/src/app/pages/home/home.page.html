@@ -12,7 +12,7 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <app-googlemaps [positionOrigen]="positionOrigen"></app-googlemaps>
+  <app-googlemaps [positionOrigen]="positionOrigen" [positionDestino]="positionDestino"></app-googlemaps>
   <div>
     <ion-button
       (click)="addPositionOrigin()"
@@ -23,5 +23,24 @@
       <ion-icon slot="start" name="location"></ion-icon>
       Seleccionar Ubicación de Origen
     </ion-button>
+
+    <ion-button
+      (click)="addPositionDestino()"
+      expand="block"
+      fill="outline"
+    >
+      <ion-icon slot="start" name="location"></ion-icon>
+      Seleccionar Ubicación de Destino
+    </ion-button>
+    
+    <ion-card>
+      <ion-card-header>
+        Precio:
+      </ion-card-header>
+      <ion-card-content>
+        {{precio}}
+      </ion-card-content>
+    </ion-card>
+
   </div>
 </ion-content>

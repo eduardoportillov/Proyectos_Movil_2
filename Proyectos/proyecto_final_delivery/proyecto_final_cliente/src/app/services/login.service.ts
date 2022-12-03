@@ -11,9 +11,7 @@ import { ResponseRegister } from '../models/ResponseRegister';
 })
 export class LoginService {
   private api = environment.UrlApiPFM2;
-  constructor(private http: HttpClient) {
-
-  }
+  constructor(private http: HttpClient) {}
 
   iniciarSesion(usuario: Usuario) {
     const ruta = `${this.api}/login`;

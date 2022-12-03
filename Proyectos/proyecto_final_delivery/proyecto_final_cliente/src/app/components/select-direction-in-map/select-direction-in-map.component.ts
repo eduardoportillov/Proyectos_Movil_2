@@ -50,8 +50,6 @@ export class SelectDirectionInMapComponent implements OnInit {
   }
 
   initMap() {
-    // let latLng = new google.maps.LatLng(this.position.lat, this.position.lng);
-
     let mapOptions = {
       center: { lat: -17.783779885678957, lng: -63.18217975277995 },
       zoom: 15,

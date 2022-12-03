@@ -19,14 +19,21 @@ declare var google: any;
 })
 export class GooglemapsComponent implements OnInit {
   originMarker: any;
+  destinoMarker: any;
 
   _positionOrigen: any = null;
-  positionDestino: any = null;
+  _positionDestino: any = null;
 
   @Input()
   set positionOrigen(position: any) {
     this._positionOrigen = position;
     this.addMarker(position, 'Origen');
+  }
+
+  @Input()
+  set positionDestino(position: any) {
+    this._positionDestino = position;
+    this.addMarker(position, 'Destino');
   }
 
   map: any;
@@ -66,10 +73,18 @@ export class GooglemapsComponent implements OnInit {
     };
 
     this.map = new google.maps.Map(this.divMap?.nativeElement, mapOptions);
+
     this.originMarker = new google.maps.Marker({
       map: this.map,
       icon: {
         url: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
+      },
+    });
+
+    this.destinoMarker = new google.maps.Marker({
+      map: this.map,
+      icon: {
+        url: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png',
       },
     });
   }
@@ -79,6 +94,14 @@ export class GooglemapsComponent implements OnInit {
       let latLng = new google.maps.LatLng(position.lat, position.lng);
 
       this.originMarker.setPosition(latLng);
+      this.map.panTo(position);
+      this.positionSet = position;
+    }
+
+    if (destiny == 'Destino') {
+      let latLng = new google.maps.LatLng(position.lat, position.lng);
+
+      this.destinoMarker.setPosition(latLng);
       this.map.panTo(position);
       this.positionSet = position;
     }
