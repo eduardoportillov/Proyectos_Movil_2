@@ -12,35 +12,32 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <app-googlemaps [positionOrigen]="positionOrigen" [positionDestino]="positionDestino"></app-googlemaps>
-  <div>
-    <ion-button
-      (click)="addPositionOrigin()"
-      expand="block"
-      color="primary"
-      fill="outline"
-    >
-      <ion-icon slot="start" name="location"></ion-icon>
-      Seleccionar Ubicación de Origen
-    </ion-button>
+  <app-googlemaps
+    [positionOrigen]="positionOrigen"
+    [positionDestino]="positionDestino"
+  ></app-googlemaps>
 
-    <ion-button
-      (click)="addPositionDestino()"
-      expand="block"
-      fill="outline"
-    >
-      <ion-icon slot="start" name="location"></ion-icon>
-      Seleccionar Ubicación de Destino
-    </ion-button>
-    
-    <ion-card>
-      <ion-card-header>
-        Precio:
-      </ion-card-header>
-      <ion-card-content>
-        {{precio}}
-      </ion-card-content>
-    </ion-card>
+  <ion-button
+    (click)="addPositionOrigin()"
+    expand="block"
+    color="primary"
+    fill="outline"
+  >
+    <ion-icon slot="start" name="location"></ion-icon>
+    Seleccionar Ubicación de Origen
+  </ion-button>
 
-  </div>
+  <ion-button (click)="addPositionDestino()" expand="block" fill="outline">
+    <ion-icon slot="start" name="location"></ion-icon>
+    Seleccionar Ubicación de Destino
+  </ion-button>
+
+  <ion-card>
+    <ion-card-header> Precio: </ion-card-header>
+    <ion-card-content>
+      <ion-label class="precio">{{precio}}</ion-label>
+    </ion-card-content>
+  </ion-card>
+
+  <button (click)="pedirEntrega()" class="pedir_entrega">Pedir Entrega</button>
 </ion-content>

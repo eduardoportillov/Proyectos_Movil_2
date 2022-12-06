@@ -40,7 +40,7 @@ export class LoginPage implements OnInit {
   }
 
   async ngOnInit() {
-    if (await Preferences.get({ key: 'token' })) {
+    if (await (await Preferences.get({ key: 'token' })).value) {
       this.router.navigate(['/home']);
     }
   }
@@ -63,6 +63,7 @@ export class LoginPage implements OnInit {
     this.apiLogin.iniciarSesion(usuario).subscribe(
       async (result) => {
         loading.dismiss();
+        
         if (result.access_token) {
           await Preferences.set({
             key: 'token',
@@ -71,9 +72,9 @@ export class LoginPage implements OnInit {
 
           await Preferences.set({
             key: 'cliente_id',
-            value: JSON.stringify(result.cliente),
+            value: result.cliente+"",
           });
-
+          
           setTimeout(() => {
             this.router.navigate(['/home']);
             this.limpiarFormulario();

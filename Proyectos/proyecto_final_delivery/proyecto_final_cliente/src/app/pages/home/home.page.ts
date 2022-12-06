@@ -8,6 +8,9 @@ import {
 import { PopoverMenuComponent } from 'src/app/components/popover-menu/popover-menu.component';
 import { SelectDirectionInMapComponent } from 'src/app/components/select-direction-in-map/select-direction-in-map.component';
 import { ClienteHttpService } from 'src/app/services/cliente-http.service';
+import { Preferences } from '@capacitor/preferences';
+import { CrearEntregaRequest } from 'src/app/models/CrearEntregaRequest';
+import { CalcularPrecioRequest } from 'src/app/models/CalcularPrecioRequest';
 
 @Component({
   selector: 'app-home',
@@ -53,7 +56,7 @@ export class HomePage {
     const { data, role } = await modalAdd.onWillDismiss();
     if (role === 'position') {
       this.positionOrigen = data;
-      if(this.positionDestino != null){
+      if (this.positionDestino != null) {
         this.calcularPrecio();
       }
     }
@@ -71,39 +74,76 @@ export class HomePage {
     const { data, role } = await modalAdd.onWillDismiss();
     if (role === 'position') {
       this.positionDestino = data;
-      if(this.positionOrigen != null){
+      if (this.positionOrigen != null) {
         this.calcularPrecio();
       }
     }
   }
 
   async calcularPrecio() {
-    
-        const calcularPrecioRequest = {
-          latitudOrigen: this.positionOrigen.lat,
-          longitudOrigen: this.positionOrigen.lng,
-          latitudDestino: this.positionDestino.lat,
-          longitudDestino: this.positionDestino.lng,
-        };
+    const CalcularPrecioRequest: CalcularPrecioRequest = {
+      latitudOrigen: this.positionOrigen.lat,
+      longitudOrigen: this.positionOrigen.lng,
+      latitudDestino: this.positionDestino.lat,
+      longitudDestino: this.positionDestino.lng,
+    };
 
-        const loading = await this.loadingController.create({
-          spinner: 'crescent',
-          translucent: false,
-        });
+    const loading = await this.loadingController.create({
+      spinner: 'crescent',
+      translucent: false,
+    });
 
-        await loading.present();
+    await loading.present();
 
-        this.clientHttp.CalcularPrecio(calcularPrecioRequest).subscribe(
-          async (result) => {
-            loading.dismiss();
-            this.precio = result.precio;
-          },
-          async (error) => {
-            loading.dismiss();
-            this.mostrarAlerta('Error', error.statusText);
-          }
-        );
+    this.clientHttp.CalcularPrecio(CalcularPrecioRequest).subscribe(
+      async (result) => {
+        loading.dismiss();
+        this.precio = result.precio;
+      },
+      async (error) => {
+        loading.dismiss();
+        this.mostrarAlerta('Error', error.statusText);
+      }
+    );
+  }
+
+  async pedirEntrega() {
+    if (this.positionOrigen != null && this.positionDestino != null) {
+
+      const clientId = await (await Preferences.get({ key: 'cliente_id' })).value
       
+      const crearEntregaRequest: CrearEntregaRequest = {
+        latitudOrigen: this.positionOrigen.lat,
+        longitudOrigen: this.positionOrigen.lng,
+        latitudDestino: this.positionDestino.lat,
+        longitudDestino: this.positionDestino.lng,
+        precio: this.precio,
+        client_id: Number(clientId),  
+      };
+
+      const loading = await this.loadingController.create({
+        spinner: 'crescent',
+        translucent: false,
+      });
+
+      await loading.present();
+
+      this.clientHttp.CrearEntrega(crearEntregaRequest).subscribe(
+        async (result) => {
+          loading.dismiss();
+          this.mostrarAlerta('Create', "Entrega creada correctamente");
+        },
+        async (error) => {
+          loading.dismiss();
+          this.mostrarAlerta('Error', error.statusText);
+        }
+      );
+    } else {
+      this.mostrarAlerta(
+        'Error',
+        'Debe seleccionar la posición de origen y destino'
+      );
+    }
   }
 
   async mostrarAlerta(titulo: string, mensaje: string) {
@@ -125,4 +165,5 @@ export class HomePage {
 
     const { role } = await alert.onDidDismiss();
   }
+
 }

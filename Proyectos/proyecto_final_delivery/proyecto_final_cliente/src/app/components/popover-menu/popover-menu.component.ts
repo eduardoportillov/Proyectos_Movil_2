@@ -15,8 +15,7 @@ export class PopoverMenuComponent implements OnInit {
 
   logOut() {
     this.eliminarStorage();
-
-    this.router.navigate(['/login']);
+    this.router.navigate(['/login']); //TODO No redirige a Login.
   };
 
   eliminarStorage = async () => {
