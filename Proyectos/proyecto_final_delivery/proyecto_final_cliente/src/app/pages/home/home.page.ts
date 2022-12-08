@@ -12,6 +12,9 @@ import { Preferences } from '@capacitor/preferences';
 import { CrearEntregaRequest } from 'src/app/models/CrearEntregaRequest';
 import { CalcularPrecioRequest } from 'src/app/models/CalcularPrecioRequest';
 
+import { Router } from '@angular/router';
+
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -28,7 +31,8 @@ export class HomePage {
     public modalController: ModalController,
     public clientHttp: ClienteHttpService,
     public loadingController: LoadingController,
-    public alertController: AlertController
+    public alertController: AlertController,
+    public router: Router
   ) {}
 
   ngOnInit() {}
@@ -111,7 +115,7 @@ export class HomePage {
     if (this.positionOrigen != null && this.positionDestino != null) {
 
       const clientId = await (await Preferences.get({ key: 'cliente_id' })).value
-      
+
       const crearEntregaRequest: CrearEntregaRequest = {
         latitudOrigen: this.positionOrigen.lat,
         longitudOrigen: this.positionOrigen.lng,
@@ -131,7 +135,8 @@ export class HomePage {
       this.clientHttp.CrearEntrega(crearEntregaRequest).subscribe(
         async (result) => {
           loading.dismiss();
-          this.mostrarAlerta('Create', "Entrega creada correctamente");
+          this.mostrarAlerta('Exito', 'Se ha creado la entrega');
+          this.router.navigate([`/contadorentrega/${result.id}`]);
         },
         async (error) => {
           loading.dismiss();
@@ -165,5 +170,4 @@ export class HomePage {
 
     const { role } = await alert.onDidDismiss();
   }
-
 }

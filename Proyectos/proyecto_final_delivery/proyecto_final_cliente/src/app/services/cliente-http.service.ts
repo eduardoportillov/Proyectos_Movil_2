@@ -6,6 +6,7 @@ import { Preferences } from '@capacitor/preferences';
 import { CalcularPrecioResponse } from '../models/CalcularPrecioResponse';
 import { CrearEntregaRequest } from '../models/CrearEntregaRequest';
 import { CrearEntregaResponse } from '../models/CrearEntregaResponse';
+import { Entrega } from '../models/Entrega';
 
 @Injectable({
   providedIn: 'root',
@@ -28,7 +29,9 @@ export class ClienteHttpService {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${this.auth_token}`,
     });
-    return this.http.post<CalcularPrecioResponse>(ruta, lonLatOriDes, { headers: headers });
+    return this.http.post<CalcularPrecioResponse>(ruta, lonLatOriDes, {
+      headers: headers,
+    });
   }
 
   CrearEntrega(Entrega: CrearEntregaRequest) {
@@ -37,6 +40,17 @@ export class ClienteHttpService {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${this.auth_token}`,
     });
-    return this.http.post<CrearEntregaResponse>(ruta, Entrega, { headers: headers });
+    return this.http.post<CrearEntregaResponse>(ruta, Entrega, {
+      headers: headers,
+    });
+  }
+
+  getEntrega(idEntregas: number) {
+    const ruta = `${this.api}/entregas/${idEntregas}`;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${this.auth_token}`,
+    });
+    return this.http.get<Entrega>(ruta, { headers: headers });
   }
 }

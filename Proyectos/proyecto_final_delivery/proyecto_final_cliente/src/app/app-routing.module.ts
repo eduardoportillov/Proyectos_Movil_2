@@ -24,6 +24,10 @@ const routes: Routes = [
         (m) => m.RegisterPageModule
       ),
   },
+  {
+    path: 'contadorentrega/:idEntrega',
+    loadChildren: () => import('./pages/contador-entrega/contadorentrega.module').then( m => m.ContadorentregaPageModule)
+  },
 ];
 
 @NgModule({
