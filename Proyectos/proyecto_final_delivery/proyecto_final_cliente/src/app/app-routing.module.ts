@@ -28,6 +28,10 @@ const routes: Routes = [
     path: 'contadorentrega/:idEntrega',
     loadChildren: () => import('./pages/contador-entrega/contadorentrega.module').then( m => m.ContadorentregaPageModule)
   },
+  {
+    path: 'seguimiento-entrega',
+    loadChildren: () => import('./pages/seguimiento-entrega/seguimiento-entrega.module').then( m => m.SeguimientoEntregaPageModule)
+  },
 ];
 
 @NgModule({

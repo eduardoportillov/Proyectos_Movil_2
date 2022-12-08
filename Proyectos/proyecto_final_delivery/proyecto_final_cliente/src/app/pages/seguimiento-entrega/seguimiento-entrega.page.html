@@ -1,0 +1,16 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-icon
+        (click)="abrirMenu($event)"
+        slot="icon-only"
+        name="menu"
+      ></ion-icon>
+    </ion-buttons>
+    <ion-title> Cliente </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <app-entrega-seguimiento [position]="position"></app-entrega-seguimiento>
+</ion-content>

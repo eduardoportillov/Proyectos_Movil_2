@@ -11,7 +11,7 @@ import { ClienteHttpService } from 'src/app/services/cliente-http.service';
 })
 export class ContadorentregaPage implements OnInit {
   idEntrega: any;
-  seconds = 5;
+  seconds = 9999;
   clock: any;
   source = timer(0, 1000);
 
