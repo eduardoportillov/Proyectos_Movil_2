@@ -1,0 +1,719 @@
+{
+	"info": {
+		"_postman_id": "0ac568f6-eac2-4c80-b6dc-14782898cf8e",
+		"name": "Movil 2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12902315"
+	},
+	"item": [
+		{
+			"name": "Practico 2",
+			"item": [
+				{
+					"name": "Imagen",
+					"item": [
+						{
+							"name": "Configuration",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL_TMDB}}/configuration?api_key={{API_KEY}}",
+									"host": [
+										"{{URL_TMDB}}"
+									],
+									"path": [
+										"configuration"
+									],
+									"query": [
+										{
+											"key": "api_key",
+											"value": "{{API_KEY}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Ruta Imagen",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL_TMDB_IMG}}/t/p/w500{{IMG_MOVIE}}",
+									"host": [
+										"{{URL_TMDB_IMG}}"
+									],
+									"path": [
+										"t",
+										"p",
+										"w500{{IMG_MOVIE}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Movie List",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const movieJsonResponse = JSON.parse(responseBody);\r",
+									"postman.setEnvironmentVariable('IMG_MOVIE', movieJsonResponse.backdrop_path);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL_TMDB}}/movie/597?api_key={{API_KEY}}&language={{LANGAUGE}}",
+							"host": [
+								"{{URL_TMDB}}"
+							],
+							"path": [
+								"movie",
+								"597"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{API_KEY}}"
+								},
+								{
+									"key": "language",
+									"value": "{{LANGAUGE}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Movie Search",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL_TMDB}}/search/movie?api_key={{API_KEY}}&language={{LANGAUGE}}&query=titanic",
+							"host": [
+								"{{URL_TMDB}}"
+							],
+							"path": [
+								"search",
+								"movie"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{API_KEY}}"
+								},
+								{
+									"key": "language",
+									"value": "{{LANGAUGE}}"
+								},
+								{
+									"key": "query",
+									"value": "titanic"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Movie Genders",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL_TMDB}}/genre/movie/list?api_key={{API_KEY}}&language={{LANGAUGE}}&query=titanic",
+							"host": [
+								"{{URL_TMDB}}"
+							],
+							"path": [
+								"genre",
+								"movie",
+								"list"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{API_KEY}}"
+								},
+								{
+									"key": "language",
+									"value": "{{LANGAUGE}}"
+								},
+								{
+									"key": "query",
+									"value": "titanic"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Proyecto Final",
+			"item": [
+				{
+					"name": "Auth",
+					"item": [
+						{
+							"name": "Login Cliente",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const loginM2JsonResponse = JSON.parse(responseBody);\r",
+											"pm.collectionVariables.set('TOKEN_PFM2', loginM2JsonResponse.access_token);\r",
+											"pm.collectionVariables.set('USER_ID_PFM2', loginM2JsonResponse.cliente)"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"clienteportillo@gmail.com\",\r\n    \"password\": \"test\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL_PFM2}}/api/login",
+									"host": [
+										"{{URL_PFM2}}"
+									],
+									"path": [
+										"api",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Login Chofer",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const loginM2JsonResponse = JSON.parse(responseBody);\r",
+											"pm.collectionVariables.set('TOKEN_PFM2', loginM2JsonResponse.access_token);\r",
+											"pm.collectionVariables.set('USER_ID_PFM2', loginM2JsonResponse.chofer)"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"choferportillo@gmail.com\",\r\n    \"password\": \"test\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL_PFM2}}/api/login",
+									"host": [
+										"{{URL_PFM2}}"
+									],
+									"path": [
+										"api",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Register Cliente",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Cliente Eduardo\",\r\n    \"lastname\": \"Portillo\",\r\n    \"email\": \"clienteportillob@gmail.com\",\r\n    \"password\": \"test\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL_PFM2}}/api/clientes",
+									"host": [
+										"{{URL_PFM2}}"
+									],
+									"path": [
+										"api",
+										"clientes"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Register Choferes",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Chofer Eduardo\",\r\n    \"lastname\": \"Portillo\",\r\n    \"email\": \"choferportillo@gmail.com\",\r\n    \"password\": \"test\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL_PFM2}}/api/choferes",
+									"host": [
+										"{{URL_PFM2}}"
+									],
+									"path": [
+										"api",
+										"choferes"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "App Client",
+					"item": [
+						{
+							"name": "Calcular Precio",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"let precioM2Json = JSON.parse(responseBody);\r",
+											"pm.collectionVariables.set('PRECIO_PFM2', precioM2Json.precio)"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"latitudOrigen\": \"-17.716961641699996\",\r\n    \"longitudOrigen\": \"-63.16789954792744\",\r\n    \"latitudDestino\": \"-17.78320022779711\",\r\n    \"longitudDestino\": \"-63.18211662103613\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL_PFM2}}/api/calcularprecio",
+									"host": [
+										"{{URL_PFM2}}"
+									],
+									"path": [
+										"api",
+										"calcularprecio"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Crear entrega",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"let entregaJson = JSON.parse(responseBody);\r",
+											"pm.collectionVariables.set('ENTREGA_ID_PFM2', entregaJson.id)"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"latitudOrigen\": \"-17.717652517267915\",\r\n    \"longitudOrigen\": \"-63.16772421957145\",\r\n    \"latitudDestino\": \"-17.782167423915354\",\r\n    \"longitudDestino\": \"-63.18054956073196\",\r\n    \"precio\": {{PRECIO_PFM2}},\r\n    \"client_id\": {{USER_ID_PFM2}}\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL_PFM2}}/api/entregas",
+									"host": [
+										"{{URL_PFM2}}"
+									],
+									"path": [
+										"api",
+										"entregas"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Rastreo Entrega",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL_PFM2}}/api/entregas/{{ENTREGA_ID_PFM2}}",
+									"host": [
+										"{{URL_PFM2}}"
+									],
+									"path": [
+										"api",
+										"entregas",
+										"{{ENTREGA_ID_PFM2}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Listar Entregas",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL_PFM2}}/api/entregas",
+									"host": [
+										"{{URL_PFM2}}"
+									],
+									"path": [
+										"api",
+										"entregas"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "App Chofer",
+					"item": [
+						{
+							"name": "FMS Entrega",
+							"item": [
+								{
+									"name": "2.- Aceptar solicitud",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"url": {
+											"raw": "{{URL_PFM2}}/api/entregas/{{ENTREGA_ID_PFM2}}/aceptar",
+											"host": [
+												"{{URL_PFM2}}"
+											],
+											"path": [
+												"api",
+												"entregas",
+												"{{ENTREGA_ID_PFM2}}",
+												"aceptar"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "3.- Chofer ya llegó a recoger entrega",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"url": {
+											"raw": "{{URL_PFM2}}/api/entregas/{{ENTREGA_ID_PFM2}}/recoger",
+											"host": [
+												"{{URL_PFM2}}"
+											],
+											"path": [
+												"api",
+												"entregas",
+												"{{ENTREGA_ID_PFM2}}",
+												"recoger"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "4.- Ya tengo la entrega",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"url": {
+											"raw": "{{URL_PFM2}}/api/entregas/{{ENTREGA_ID_PFM2}}/entregarecogida",
+											"host": [
+												"{{URL_PFM2}}"
+											],
+											"path": [
+												"api",
+												"entregas",
+												"{{ENTREGA_ID_PFM2}}",
+												"entregarecogida"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "5.- Finalizar entrega",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"url": {
+											"raw": "{{URL_PFM2}}/api/entregas/{{ENTREGA_ID_PFM2}}/entregada",
+											"host": [
+												"{{URL_PFM2}}"
+											],
+											"path": [
+												"api",
+												"entregas",
+												"{{ENTREGA_ID_PFM2}}",
+												"entregada"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Solicitudes Pendientes",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL_PFM2}}/api/entregas/pendientes",
+									"host": [
+										"{{URL_PFM2}}"
+									],
+									"path": [
+										"api",
+										"entregas",
+										"pendientes"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Actualizar Ubicación del Chofer",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"latitud\": \"\",\r\n    \"longitud\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL_PFM2}}/api/choferes/{{USER_ID_PFM2}}/location",
+									"host": [
+										"{{URL_PFM2}}"
+									],
+									"path": [
+										"api",
+										"choferes",
+										"{{USER_ID_PFM2}}",
+										"location"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{TOKEN_PFM2}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "URL_TMDB_IMG",
+			"value": "https://image.tmdb.org",
+			"type": "string"
+		},
+		{
+			"key": "URL_TMDB",
+			"value": "https://api.themoviedb.org/3",
+			"type": "string"
+		},
+		{
+			"key": "API_KEY",
+			"value": "db4ca37a177e5e6182de918e6d531984",
+			"type": "string"
+		},
+		{
+			"key": "IMG_MOVIE",
+			"value": "/"
+		},
+		{
+			"key": "LANGAUGE",
+			"value": "pt-ES",
+			"type": "string"
+		},
+		{
+			"key": "URL_PFM2",
+			"value": "http://apimoviles2.jmacboy.com",
+			"type": "string"
+		},
+		{
+			"key": "TOKEN_PFM2",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "PRECIO_PFM2",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "USER_ID_PFM2",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "ENTREGA_ID_PFM2",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
