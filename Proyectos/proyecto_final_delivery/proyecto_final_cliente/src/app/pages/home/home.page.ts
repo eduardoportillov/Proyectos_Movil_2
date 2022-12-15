@@ -3,6 +3,7 @@ import {
   AlertController,
   LoadingController,
   ModalController,
+  NavParams,
   PopoverController,
 } from '@ionic/angular';
 import { PopoverMenuComponent } from 'src/app/components/popover-menu/popover-menu.component';
@@ -136,7 +137,7 @@ export class HomePage {
         async (result) => {
           loading.dismiss();
           this.mostrarAlerta('Exito', 'Se ha creado la entrega');
-          this.router.navigate([`/contadorentrega/${result.id}`]);
+          this.router.navigate([`/contadorentrega`, result.id]);
         },
         async (error) => {
           loading.dismiss();

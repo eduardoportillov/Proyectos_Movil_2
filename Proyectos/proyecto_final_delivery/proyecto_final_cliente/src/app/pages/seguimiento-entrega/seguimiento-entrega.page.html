@@ -7,10 +7,20 @@
         name="menu"
       ></ion-icon>
     </ion-buttons>
-    <ion-title> Cliente </ion-title>
+    <ion-title> Seguimiento Entrega </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <app-entrega-seguimiento [position]="position"></app-entrega-seguimiento>
+  <app-entrega-seguimiento
+    [positionActual]="positionActual"
+    [positionOrigen]="positionOrigen"
+    [positionDestino]="positionDestino"
+  ></app-entrega-seguimiento>
+
+  <div>
+    <ion-label>
+      Estado: {{ estado }}
+    </ion-label>
+  </div>
 </ion-content>

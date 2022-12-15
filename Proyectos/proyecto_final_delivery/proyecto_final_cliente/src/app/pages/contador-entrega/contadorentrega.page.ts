@@ -11,31 +11,28 @@ import { ClienteHttpService } from 'src/app/services/cliente-http.service';
 })
 export class ContadorentregaPage implements OnInit {
   idEntrega: any;
-  seconds = 9999;
+  seconds = 120;
   clock: any;
   source = timer(0, 1000);
 
   constructor(
     public alertController: AlertController,
-    public route: ActivatedRoute,
+    public activatedRoute: ActivatedRoute,
     public router: Router,
     public clientHttp: ClienteHttpService
   ) {}
 
   ngOnInit() {
-    this.route.paramMap.subscribe((params) => {
-      if (params.has('idEntrega')) {
-        this.idEntrega = params.get('idEntrega');
-      }
-    });
-    
+    this.idEntrega = this.activatedRoute.snapshot.paramMap.get("idEntrega");
+
     this.clock = this.source.subscribe((t) => {
       this.seconds--;
-
-      this.clientHttp.getEntrega(parseInt(this.idEntrega)).subscribe((data) => {
-        if (data.chofer_id != null) {
+      
+      this.clientHttp.getEntrega(parseInt(this.idEntrega)).subscribe((result) => {
+        if (result.chofer_id != null) {
           this.clock.unsubscribe();
           console.log('Entrega aceptada');
+          this.router.navigate([`/seguimiento-entrega`, this.idEntrega]);
         } else {
           console.log('Entrega no aceptada');
         }

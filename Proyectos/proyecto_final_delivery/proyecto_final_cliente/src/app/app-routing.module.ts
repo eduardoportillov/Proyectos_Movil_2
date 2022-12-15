@@ -29,7 +29,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/contador-entrega/contadorentrega.module').then( m => m.ContadorentregaPageModule)
   },
   {
-    path: 'seguimiento-entrega',
+    path: 'seguimiento-entrega/:idEntrega',
     loadChildren: () => import('./pages/seguimiento-entrega/seguimiento-entrega.module').then( m => m.SeguimientoEntregaPageModule)
   },
 ];
