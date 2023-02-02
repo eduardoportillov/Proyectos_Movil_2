@@ -55,7 +55,7 @@ const login = () => {
                 </Pressable>
                 <Pressable
                     style={styles.button}
-                    onPress={() => navigation.navigate("Register")}
+                    onPress={() => navigation.navigate("register")}
                 >
                     <Text style={styles.text}>Registrarse</Text>
                 </Pressable>
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         paddingVertical: 12,
         paddingHorizontal: 32,
-        backgroundColor: "black",
+        backgroundColor: "blue",
         marginVertical: 10,
     },
     text: {

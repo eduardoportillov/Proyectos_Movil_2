@@ -23,30 +23,37 @@ export class ContadorentregaPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.idEntrega = this.activatedRoute.snapshot.paramMap.get("idEntrega");
+    this.idEntrega = this.activatedRoute.snapshot.paramMap.get('idEntrega');
 
     this.clock = this.source.subscribe((t) => {
       this.seconds--;
-      
-      this.clientHttp.getEntrega(parseInt(this.idEntrega)).subscribe((result) => {
-        if (result.chofer_id != null) {
-          this.clock.unsubscribe();
-          console.log('Entrega aceptada');
-          this.router.navigate([`/seguimiento-entrega`, this.idEntrega]);
-        } else {
-          console.log('Entrega no aceptada');
-        }
-      });
+
+      this.clientHttp
+        .getEntrega(parseInt(this.idEntrega))
+        .subscribe((result) => {
+          if (result.chofer_id != null) {
+            this.clock.unsubscribe();
+            console.log('Entrega aceptada');
+            this.router.navigate([`/seguimiento-entrega`, this.idEntrega]);
+          } else {
+            console.log('Entrega no aceptada');
+          }
+        });
 
       if (this.seconds === 0) {
         this.clock.unsubscribe();
-        this.navigateToHome()
+        this.navigateToHome();
       }
     });
   }
 
   navigateToHome() {
-    this.mostrarAlerta('Tiempo de espera agotado', 'No se ha aceptado la entrega');
+    this.clock.unsubscribe();
+
+    this.mostrarAlerta(
+      'Tiempo de espera agotado',
+      'No se ha aceptado la entrega'
+    );
     this.router.navigate(['/home']);
   }
 

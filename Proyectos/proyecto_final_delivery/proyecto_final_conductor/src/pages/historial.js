@@ -22,9 +22,10 @@ export default class historial extends Component {
             Model.entrega.getEnCurso().then(r => {
                 this.props.navigation.replace("entrega")
             }).catch(() => {
+                this.state.user = usr;
                 Model.entrega.getAll({ token: usr.access_token }).then((resp) => {
                     console.log(usr)
-                    var arr = resp.filter(o => o.chofer_id == usr.cliente);
+                    var arr = resp.filter(o => o.chofer_id == usr.chofer);
                     this.setState({
                         data: arr
                     })
@@ -37,8 +38,6 @@ export default class historial extends Component {
     }
     getLista() {
         if (!this.state.data) return null;
-        console.log(this.state.data)
-        console.log("***************************")
         return this.state.data.map((obj) => {
             return <SView style={{
                 padding: 8,
@@ -78,6 +77,7 @@ export default class historial extends Component {
                         {this.getLista()}
                     </ScrollView>
                 </SView>
+
                 <BottomBar {...this.props} />
             </SView>
         );

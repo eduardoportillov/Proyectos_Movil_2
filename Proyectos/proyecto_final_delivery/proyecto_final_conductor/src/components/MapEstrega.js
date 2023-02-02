@@ -33,8 +33,6 @@ export default class MapEntrega extends Component {
             region={{
                 latitude: (parseFloat(latitudOrigen) + parseFloat(latitudDestino)) / 2,
                 longitude: (parseFloat(longitudOrigen) + parseFloat(longitudDestino)) / 2,
-                // latitude: 0,
-                // longitude: 0,
                 latitudeDelta: 0.1,
                 longitudeDelta: 0.1,
             }}
@@ -44,7 +42,7 @@ export default class MapEntrega extends Component {
                     latitud: coords.latitude,
                     longitud: coords.longitude
                 }
-                Model.choferes.changeLocation({ id: this.state.usr.cliente, token: this.state.usr.access_token, latLng: latLng }).then(resp => {
+                Model.choferes.changeLocation({ id: this.state.usr.chofer, token: this.state.usr.access_token, latLng: latLng }).then(resp => {
                     console.log(resp)
                 }).catch(e => {
                     console.error(e);

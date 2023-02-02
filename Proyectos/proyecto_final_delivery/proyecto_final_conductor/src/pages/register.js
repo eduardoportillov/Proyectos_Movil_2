@@ -87,7 +87,7 @@ const register = () => {
         </Pressable>
         <Pressable
           style={styles.button}
-          onPress={() => navigation.navigate("Login")}
+          onPress={() => navigation.navigate("login")}
         >
           <Text style={styles.text}>Cancelar</Text>
         </Pressable>
@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingVertical: 12,
     paddingHorizontal: 32,
-    backgroundColor: "black",
+    backgroundColor: "blue",
     marginVertical: 10,
   },
   text: {
